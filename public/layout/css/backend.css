@@ -1,0 +1,252 @@
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+/* login page */
+.card-center {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* user page */
+
+
+.form-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.card {
+    width: 100%;
+    max-width: 400px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* عرض فتورت  */
+.receipt-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+}
+
+/* side navbar */
+/* Sidebar Desktop */
+/* Sidebar Desktop */
+.sidebar {
+    position: fixed;
+    top: 0;
+        left: 0;
+        height: 100vh;
+        width: 250px;
+        background-color: #198754;
+        color: white;
+        overflow-y: auto;
+        padding: 1.5rem 1rem;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Hide sidebar on mobile */
+
+
+/* Content shift */
+
+
+
+
+.sidebar h3 {
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.sidebar .nav-link {
+    padding: 0.5rem 0.75rem;
+    display: block;
+    border-radius: 0.25rem;
+    transition: background-color 0.2s;
+    color: #ffffff;
+}
+
+.sidebar .nav-link:hover,
+.sidebar .nav-link:focus {
+    background-color: #157347;
+    text-decoration: none;
+}
+
+.sidebar .btn-link {
+    color: #ffffff;
+}
+/* Main content */
+.content {
+    padding: 2rem 1.5rem;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+    margin-left: 250px;
+    /* أهم سطر */
+}
+@media (max-width: 991px) {
+    .content {
+        margin-left: 0;
+    }
+}
+
+
+.card {
+    border-radius: 0.75rem;
+}
+
+.card-header {
+    font-weight: bold;
+}
+
+/* جدول Responsive أنيق */
+.table-responsive {
+    overflow-x: auto;
+    max-width: 100%;
+}
+
+/* Table mobile fix */
+@media (max-width: 768px) {
+    table {
+        min-width: 700px;
+    }
+}
+/* Charts responsive */
+canvas {
+    width: 100% !important;
+    height: 300px !important;
+}
+
+@media (max-width: 576px) {
+    canvas {
+        height: 260px !important;
+    }
+}
+.offcanvas .nav-link {
+    padding: 12px 10px;
+    border-radius: 8px;
+}
+
+.offcanvas .nav-link:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+
+.chat-body {
+    height: 400px;
+    overflow-y: auto;
+    background-color: #f8f9fa;
+    padding: 15px;
+}
+
+/* Common message style */
+.user-msg,
+.bot-msg {
+    margin-bottom: 15px;
+    padding: 10px 15px;
+    border-radius: 15px;
+    max-width: 70%;
+    word-wrap: break-word;
+}
+
+/* USER (RIGHT SIDE) */
+.user-msg {
+    background-color: #007bff;
+    color: white;
+    margin-left: auto;
+    text-align: right;
+    border-radius: 15px 15px 0 15px;
+}
+
+/* ADMIN / BOT (LEFT SIDE) */
+.bot-msg {
+    background-color: #e9ecef;
+    color: #333;
+    margin-right: auto;
+    text-align: left;
+    border-radius: 15px 15px 15px 0;
+}
+.dashboard-card {
+    border: none;
+    border-radius: 18px;
+    padding: 10px;
+    transition: 0.3s;
+    color: #fff;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.18);
+}
+
+.icon-circle {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.bg-sales {
+    background: linear-gradient(45deg, #28a745, #20c997);
+}
+
+.bg-users {
+    background: linear-gradient(45deg, #17a2b8, #0dcaf0);
+}
+
+.bg-orders {
+    background: linear-gradient(45deg, #6f42c1, #a370f7);
+}
+
+.bg-purchase {
+    background: linear-gradient(45deg, #dc3545, #ff6b6b);
+}
+
+.bg-profit {
+    background: linear-gradient(45deg, #ff9800, #ffc107);
+}
+/* Dashboard header mobile */
+@media (max-width: 576px) {
+    h2 {
+        font-size: 20px;
+        text-align: center;
+        width: 100%;
+    }
+
+    .navbar .btn {
+        width: 100%;
+    }
+}
+@media (max-width: 991px) {
+    .sidebar {
+        display: none;
+    }
+}
+/* Stat cards mobile spacing */
+@media (max-width: 576px) {
+    .card {
+        padding: 5px;
+    }
+
+    .card h6 {
+        font-size: 13px;
+    }
+
+    .card .h3 {
+        font-size: 22px;
+    }
+}
+
+

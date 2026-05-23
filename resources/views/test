@@ -1,0 +1,136 @@
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned -Force
+npm run dev
+php artisan serve
+
+
+
+@extends('include.templat.main_page')
+
+@section('title')
+    Show Purchase
+@endsection
+
+@php
+    $showNavbar = true;
+@endphp
+
+@section('contact')
+
+<!-- زر الإضافة في الأعلى -->
+<div class="text-center my-4">
+    <a href="{{ route('create_purchase') }}" class="btn btn-outline-success">Add Purchase</a>
+</div>
+
+<!-- جدول المشتريات -->
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Supplier</th>
+            <th scope="col">User</th>
+            <th scope="col">Total Amount</th>
+            <th scope="col">Created At</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody class="table-group-divider">
+        @foreach ($show_purchases as $purchase)
+            <tr>
+                <th scope="row">{{ $purchase->id }}</th>
+                <td>{{ $purchase->supplier?->name ?? 'N/A' }}</td>
+                <td>{{ $purchase->user?->username ?? 'N/A' }}</td>
+                <td>{{ $purchase->total_amount }}</td>
+                <td>{{ $purchase->created_at }}</td>
+                <td>
+                    <a href="{{ route('edit_purchase', $purchase->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                    <form action="{{ route('destroy_purchase', ['id' => $purchase->id]) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this purchase?')">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        @endforeach
+    </tbody>
+</table>
+@endsection
+
+
+
+
+<?php
+
+namespace App\Http\Controllers;
+use App\Models\Customer;
+
+use Illuminate\Http\Request;
+
+class customer_con extends Controller
+{
+    public function create_customer(){
+
+        return view('customers.create_customer');
+    }
+    public function show_customer(){
+        $show_customers = Customer::all();
+        return view('customers.show_customer',compact('show_customers'));
+    }
+    public function store_customer(Request $request)
+{
+    $validated = $request->validate([
+        'username' => 'required|string|max:255',
+        'phone' => 'required|numeric|min:11',
+        'address' => 'required',
+        'email'    => 'required|email|unique:customers,email',
+        'password' => 'nullable|min:6|confirmed',
+    ]);
+
+    Customer::create([
+        'username' => $validated['username'],
+        'phone' => $validated['phone'],
+        'email' => $validated['email'],
+        'password' => $validated['password'], // يفضل تعمل تشفير
+        'address' => $validated['address'],
+    ]);
+
+    return to_route('show_customer');
+}
+
+public function edit_customer($id) {
+    $customer = Customer::findOrFail($id);
+    return view('customers.edit_customer', ['customer' => $customer]);
+}
+
+
+public function update_customer(Request $request) {
+    // ✅ 1. Validate البيانات
+    $validated = $request->validate([
+        'username' => 'required|string|max:255',
+        'phone' => 'required|numeric|min:11',
+        'address' => 'required',
+        'email'    => 'required|email|unique:customers,email,' ,
+        'password' => 'nullable|min:6|confirmed',
+    ]);
+
+    // ✅ 2. جلب المستخدم من قاعدة البيانات
+    $customer = Customer::findOrFail($request->id);
+
+    // ✅ 3. تحديث البيانات
+    $customer->update($validated);
+
+
+
+    // ✅ 5. حفظ البيانات
+
+
+    // ✅ 6. Redirect مع رسالة نجاح
+    return redirect()->route('show_customer')->with('success', 'customer updated successfully!');
+}
+public function delete_customer($id) {
+    $customer = Customer::findOrFail($id);
+    $customer->delete();
+
+    return redirect()->route('show_customer')->with('success', 'customer deleted successfully!');
+}
+
+}
